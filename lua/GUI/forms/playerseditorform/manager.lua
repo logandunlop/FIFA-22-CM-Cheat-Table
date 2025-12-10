@@ -4759,6 +4759,332 @@ function thisFormManager:fut_copy_card_to_gui(player)
                     self.logger:debug(string.format("%s = %d", component_name, stat_value))
                 end
             end
+            
+            -- Apply chem style:
+            local chem_style_itm_index = self.frm.FUTChemStyleCB.ItemIndex
+            local chem_styles = {
+                -- Basic
+                {
+                    SprintSpeedEdit = 5,
+                    AttackPositioningEdit = 5,
+                    ShotPowerEdit = 5,
+                    VolleysEdit = 5,
+                    PenaltiesEdit = 5,
+                    VisionEdit = 5,
+                    ShortPassingEdit = 5,
+                    LongPassingEdit = 5,
+                    CurveEdit = 5,
+                    AgilityEdit = 5,
+                    BallControlEdit = 5,
+                    DribblingEdit = 5,
+                    MarkingEdit = 5,
+                    StandingTackleEdit = 5,
+                    SlidingTackleEdit = 5,
+                    JumpingEdit = 5,
+                    StrengthEdit = 5
+                },
+                -- GK Basic
+                {
+                    GKDivingEdit = 10,
+                    GKHandlingEdit = 10,
+                    GKKickingEdit = 10,
+                    GKReflexEdit = 10,
+                    AccelerationEdit = 5,
+                    GKPositioningEdit = 10
+                },
+                -- Sniper
+                {
+                    AttackPositioningEdit = 10,
+                    FinishingEdit = 15,
+                    VolleysEdit = 10,
+                    PenaltiesEdit = 15,
+                    AgilityEdit = 5,
+                    BalanceEdit = 10,
+                    ReactionsEdit = 5,
+                    BallControlEdit = 5,
+                    DribblingEdit = 15
+                },
+                -- Finisher
+                {
+                    FinishingEdit = 5,
+                    ShotPowerEdit = 15,
+                    LongShotsEdit = 15,
+                    VolleysEdit = 10,
+                    PenaltiesEdit = 10,
+                    JumpingEdit = 15,
+                    StrengthEdit = 10,
+                    AggressionEdit = 10
+                },
+                -- Deadeye
+                {
+                    AttackPositioningEdit = 10,
+                    FinishingEdit = 15,
+                    ShotPowerEdit = 10,
+                    LongShotsEdit = 5,
+                    PenaltiesEdit = 5,
+                    VisionEdit = 5,
+                    FreeKickAccuracyEdit = 10,
+                    LongPassingEdit = 5,
+                    ShortPassingEdit = 15,
+                    CurveEdit = 10
+                },
+                -- Marksman
+                {
+                    AttackPositioningEdit = 10,
+                    FinishingEdit = 5,
+                    ShotPowerEdit = 10,
+                    LongShotsEdit = 10,
+                    VolleysEdit = 10,
+                    PenaltiesEdit = 5,
+                    AgilityEdit = 5,
+                    ReactionsEdit = 5,
+                    BallControlEdit = 5,
+                    DribblingEdit = 5,
+                    JumpingEdit = 10,
+                    StrengthEdit = 5,
+                    AggressionEdit = 5
+                },
+                -- Hawk
+                {
+                    AccelerationEdit = 10,
+                    SprintSpeedEdit = 5,
+                    AttackPositioningEdit = 10,
+                    FinishingEdit = 5,
+                    ShotPowerEdit = 10,
+                    LongShotsEdit = 10,
+                    VolleysEdit = 10,
+                    PenaltiesEdit = 5,
+                    JumpingEdit = 10,
+                    StrengthEdit = 5,
+                    AggressionEdit = 10
+                },
+                -- Artist
+                {
+                    VisionEdit = 15,
+                    CrossingEdit = 5,
+                    LongPassingEdit = 15,
+                    ShortPassingEdit = 10,
+                    CurveEdit = 5,
+                    AgilityEdit = 5,
+                    BalanceEdit = 5,
+                    ReactionsEdit = 10,
+                    BallControlEdit = 5,
+                    DribblingEdit = 15
+                },
+                -- Architect
+                {
+                    VisionEdit = 10,
+                    CrossingEdit = 15,
+                    FreeKickAccuracyEdit = 5,
+                    LongPassingEdit = 15,
+                    ShortPassingEdit = 10,
+                    CurveEdit = 5,
+                    JumpingEdit = 5,
+                    StrengthEdit = 15,
+                    AggressionEdit = 10
+                },
+                -- Powerhouse
+                {
+                    VisionEdit = 10,
+                    CrossingEdit = 5,
+                    LongPassingEdit = 10,
+                    ShortPassingEdit = 15,
+                    CurveEdit = 10,
+                    InterceptionsEdit = 5,
+                    MarkingEdit = 10,
+                    StandingTackleEdit = 15,
+                    SlidingTackleEdit = 10
+                },
+                -- Maestro
+                {
+                    AttackPositioningEdit = 5,
+                    FinishingEdit = 5,
+                    ShotPowerEdit = 10,
+                    LongShotsEdit = 10,
+                    VolleysEdit = 10,
+                    VisionEdit = 5,
+                    FreeKickAccuracyEdit = 10,
+                    LongPassingEdit = 5,
+                    ShortPassingEdit = 10,
+                    ReactionsEdit = 5,
+                    BallControlEdit = 5,
+                    DribblingEdit = 10
+                },
+                -- Engine
+                {
+                    AccelerationEdit = 10,
+                    SprintSpeedEdit = 5,
+                    VisionEdit = 5,
+                    CrossingEdit = 5,
+                    FreeKickAccuracyEdit = 10,
+                    LongPassingEdit = 5,
+                    ShortPassingEdit = 10,
+                    CurveEdit = 5,
+                    AgilityEdit = 5,
+                    BalanceEdit = 10,
+                    ReactionsEdit = 5,
+                    BallControlEdit = 5,
+                    DribblingEdit = 10
+                },
+                -- Sentinel
+                {
+                    InterceptionsEdit = 5,
+                    HeadingAccuracyEdit = 10,
+                    MarkingEdit = 15,
+                    StandingTackleEdit = 15,
+                    SlidingTackleEdit = 10,
+                    JumpingEdit = 5,
+                    StrengthEdit = 15,
+                    AggressionEdit = 10
+                },
+                -- Guardian
+                {
+                    AgilityEdit = 5,
+                    BalanceEdit = 10,
+                    ReactionsEdit = 5,
+                    BallControlEdit = 5,
+                    DribblingEdit = 15,
+                    InterceptionsEdit = 10,
+                    HeadingAccuracyEdit = 5,
+                    MarkingEdit = 15,
+                    StandingTackleEdit = 10,
+                    SlidingTackleEdit = 10
+                },
+                -- Gladiator
+                {
+                    AttackPositioningEdit = 15,
+                    FinishingEdit = 5,
+                    ShotPowerEdit = 10,
+                    LongShotsEdit = 5,
+                    InterceptionsEdit = 10,
+                    HeadingAccuracyEdit = 15,
+                    MarkingEdit = 5,
+                    StandingTackleEdit = 10,
+                    SlidingTackleEdit = 15
+                },
+                -- Backbone
+                {
+                    VisionEdit = 5,
+                    CrossingEdit = 5,
+                    LongPassingEdit = 5,
+                    ShortPassingEdit = 10,
+                    CurveEdit = 5,
+                    InterceptionsEdit = 5,
+                    HeadingAccuracyEdit = 5,
+                    MarkingEdit = 10,
+                    StandingTackleEdit = 10,
+                    SlidingTackleEdit = 10,
+                    JumpingEdit = 5,
+                    StrengthEdit = 10,
+                    AggressionEdit = 5
+                },
+                -- Anchor
+                {
+                    AccelerationEdit = 10,
+                    SprintSpeedEdit = 5,
+                    InterceptionsEdit = 5,
+                    HeadingAccuracyEdit = 10,
+                    MarkingEdit = 10,
+                    StandingTackleEdit = 10,
+                    SlidingTackleEdit = 10,
+                    JumpingEdit = 10,
+                    StrengthEdit = 10,
+                    AggressionEdit = 10
+                },
+                -- Hunter
+                {
+                    AccelerationEdit = 15,
+                    SprintSpeedEdit = 10,
+                    AttackPositioningEdit = 15,
+                    FinishingEdit = 10,
+                    ShotPowerEdit = 10,
+                    LongShotsEdit = 5,
+                    VolleysEdit = 10,
+                    PenaltiesEdit = 15
+                },
+                -- Catalyst
+                {
+                    AccelerationEdit = 15,
+                    SprintSpeedEdit = 10,
+                    VisionEdit = 15,
+                    CrossingEdit = 10,
+                    FreeKickAccuracyEdit = 10,
+                    LongPassingEdit = 5,
+                    ShortPassingEdit = 10,
+                    CurveEdit = 15
+                },
+                -- Shadow
+                {
+                    AccelerationEdit = 15,
+                    SprintSpeedEdit = 10,
+                    InterceptionsEdit = 10,
+                    HeadingAccuracyEdit = 10,
+                    MarkingEdit = 15,
+                    StandingTackleEdit = 15,
+                    SlidingTackleEdit = 15
+                },
+                -- Wall
+                {
+                    GKDivingEdit = 15,
+                    GKHandlingEdit = 15,
+                    GKKickingEdit = 15
+                },
+                -- Shield
+                {
+                    GKKickingEdit = 15,
+                    GKReflexEdit = 15,
+                    AccelerationEdit = 10,
+                    SprintSpeedEdit = 5
+                },
+                -- Cat
+                {
+                    GKReflexEdit = 15,
+                    AccelerationEdit = 10,
+                    SprintSpeedEdit = 5,
+                    GKPositioningEdit = 15
+                },
+                -- Glove
+                {
+                    GKDivingEdit = 15,
+                    GKHandlingEdit = 15,
+                    GKPositioningEdit = 15
+                },
+            }
+
+            if chem_styles[chem_style_itm_index] then
+                self.logger:info(string.format("Applying chem style index %d", chem_style_itm_index))
+                for component_name, modif in pairs(chem_styles[chem_style_itm_index]) do
+                    local component = self.frm[component_name]
+                    -- tmp disable onchange event
+                    local onchange_event = component.OnChange
+                    component.OnChange = nil
+
+                    local new_attr_val = tonumber(component.Text) + modif
+                    if new_attr_val > 99 then
+                        new_attr_val = 99 
+                    elseif new_attr_val <= 0 then
+                        new_attr_val = 1
+                    end
+
+                    component.Text = new_attr_val
+                    
+                    component.OnChange = onchange_event
+                    self.change_list[component_name] = 1
+                end
+            end
+
+            local trackbars = {
+                'AttackTrackBar',
+                'DefendingTrackBar',
+                'SkillTrackBar',
+                'GoalkeeperTrackBar',
+                'PowerTrackBar',
+                'MovementTrackBar',
+                'MentalityTrackBar',
+            }
+            for i=1, #trackbars do
+                self:update_trackbar(self.frm[trackbars[i]])
+            end
         end
         
         -- Recalculate OVR for best at positions
