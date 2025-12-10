@@ -3674,22 +3674,128 @@ function thisFormManager:check_if_has_unsaved_changes()
     end
 end
 
+function thisFormManager:fut_find_player_html(player_name, page, fut_fifa)
+    -- Scrape HTML search page for FIFA versions where API doesn't work
+    local request = string.format(
+        'https://www.futbin.com/%d/players?page=%d&search=%s',
+        fut_fifa, page, encodeURI(player_name)
+    )
+    self.logger:info(string.format("FUT HTML search: %s", request))
+    
+    local r = getInternet()
+    local reply = r.getURL(request)
+    if reply == nil then
+        self.logger:warning(string.format('No reply from: %s', request))
+        return nil
+    end
+    
+    -- Debug: Save HTML to file for inspection
+    local debug_file = io.open("logs/futbin_search_debug.html", "w")
+    if debug_file then
+        debug_file:write(reply)
+        debug_file:close()
+        self.logger:info("Saved HTML response to logs/futbin_search_debug.html for inspection")
+    end
+    
+    local players = {}
+    
+    -- Try multiple patterns since futbin structure may vary
+    
+    -- Pattern 1: Player row with class="player-row" (FIFA 26+ structure)
+    self.logger:debug("Trying pattern 1: <tr class='player-row'...")
+    for player_row in string.gmatch(reply, '<tr class="player%-row[^"]*".-</tr>') do
+        -- Extract player URL and ID from href
+        local player_url, player_id_str, slug = string.match(player_row, 'href="(/%d+/player/(%d+)/([^"]+))"')
+        
+        if player_url and player_id_str then
+            -- Extract player name from table-player-name
+            local full_name = string.match(player_row, 'class="table%-player%-name">([^<]+)</a>')
+            
+            -- Extract rating from rating-square or playercard rating
+            local rating = string.match(player_row, 'class="rating%-square[^>]*>(%d+)</div>') or
+                          string.match(player_row, 'class="playercard%-s%-26%-rating">(%d+)</div>')
+            
+            -- Extract position from table-pos
+            local position = string.match(player_row, 'class="table%-pos%-main[^>]*><span>([^<]+)</span>')
+            
+            -- Extract revision/version
+            local version = string.match(player_row, 'class="table%-player%-revision">([^<]+)</div>') or "Normal"
+            
+            if full_name and rating then
+                table.insert(players, {
+                    id = tonumber(player_id_str),
+                    rating = tonumber(rating),
+                    position = position or "Unknown",
+                    version = version,
+                    full_name = full_name,
+                    player_url = player_url
+                })
+                self.logger:debug(string.format("Found player: %s (ID: %s, Rating: %s, Pos: %s)", 
+                    full_name, player_id_str, rating, position or "?"))
+            end
+        end
+    end
+    
+    -- Pattern 2: Simple player URL extraction (fallback)
+    if #players == 0 then
+        self.logger:debug("Trying pattern 2: Direct player URLs from links...")
+        -- Track seen IDs to avoid duplicates
+        local seen_ids = {}
+        
+        for player_url, player_id_str, slug in string.gmatch(reply, 'href="(/%d+/player/(%d+)/([^"]+))"') do
+            if not seen_ids[player_id_str] then
+                seen_ids[player_id_str] = true
+                
+                local full_name = string.gsub(slug, '%-', ' ')
+                -- Capitalize first letter of each word
+                full_name = string.gsub(full_name, "(%a)([%w_']*)", function(first, rest)
+                    return string.upper(first) .. rest
+                end)
+                
+                table.insert(players, {
+                    id = tonumber(player_id_str),
+                    rating = 0,
+                    position = "Unknown",
+                    version = "Normal",
+                    full_name = full_name,
+                    player_url = player_url
+                })
+                self.logger:debug(string.format("Found player URL: %s (ID: %s)", full_name, player_id_str))
+            end
+        end
+    end
+    
+    if #players == 0 then
+        self.logger:warning("No players found in HTML response. Check logs/futbin_search_debug.html to inspect the structure.")
+        return nil
+    end
+    
+    self.logger:info(string.format("Found %d players from HTML", #players))
+    return players
+end
+
 function thisFormManager:fut_find_player(player_name, page, fut_fifa)
     if page == nil then
         page = 1
     end
 
-    -- no pagination here on futbin
+    -- Try API first
     local request = URL_LINKS['FUT']['player_search'] .. string.format(
         '?year=%d&extra=1&term=%s',
         fut_fifa, encodeURI(player_name)
     )
-    --self.logger:debug(string.format("FUT FIND PLAYER: %s", request))
+    self.logger:debug(string.format("FUT FIND PLAYER API: %s", request))
     local r = getInternet()
     local reply = r.getURL(request)
     if reply == nil then
         self.logger:warning(string.format('No internet connection? No reply from: %s', request))
         return nil
+    end
+
+    -- Check if reply is HTML (error page) instead of JSON
+    if string.match(reply, '<html') or string.match(reply, '<!DOCTYPE') then
+        self.logger:info(string.format('Futbin API returned HTML for FIFA %d. Falling back to HTML scraping...', fut_fifa))
+        return self:fut_find_player_html(player_name, page, fut_fifa)
     end
 
     local status, response = pcall(
@@ -3698,10 +3804,10 @@ function thisFormManager:fut_find_player(player_name, page, fut_fifa)
     )
 
     if status == false then
-        self.logger:error('Futbin error: ' .. reply)
-        return nil
+        self.logger:warning('Futbin API JSON decode failed. Falling back to HTML scraping...')
+        return self:fut_find_player_html(player_name, page, fut_fifa)
     elseif response['error'] then
-        self.logger:error('Futbin error: ' .. response['error'])
+        self.logger:error('Futbin API error: ' .. response['error'])
         return nil
     end
     --self.logger:debug(string.format("FUT FIND PLAYER response:\n %s", response))
@@ -3741,6 +3847,15 @@ function thisFormManager:fut_search_player(player_data, page)
 
     for i=1, players_count do
         local player = players[i]
+        
+        -- Debug: log all available fields in first player
+        if i == 1 then
+            self.logger:debug("First player fields from search:")
+            for key, value in pairs(player) do
+                self.logger:debug(string.format("  %s = %s", tostring(key), tostring(value)))
+            end
+        end
+        
         local card_type = player['version'] or 'Normal'
         local formated_string = string.format(
             '%s - %s - %d ovr - %s',
@@ -3794,16 +3909,25 @@ function thisFormManager:create_player_slug(player_name)
     return slug
 end
 
-function thisFormManager:fut_get_player_details(playerid, fut_fifa, player_name)
+function thisFormManager:fut_get_player_details(playerid, fut_fifa, player_name, player_url)
     self.logger:info(string.format("Loading FUT%d player: %d", fut_fifa, playerid))
     
-    local player_slug = self:create_player_slug(player_name)
-    local request = string.format(
-        "https://www.futbin.com/%d/player/%d/%s",
-        fut_fifa,
-        playerid,
-        player_slug
-    )
+    local request
+    if player_url and player_url ~= "" then
+        -- Use the URL from search results (already includes correct slug)
+        request = "https://www.futbin.com" .. player_url
+        self.logger:info(string.format("Using URL from search: %s", request))
+    else
+        -- Fallback to generating slug from player name
+        local player_slug = self:create_player_slug(player_name)
+        request = string.format(
+            "https://www.futbin.com/%d/player/%d/%s",
+            fut_fifa,
+            playerid,
+            player_slug
+        )
+        self.logger:warning(string.format("No player_url in search results, using generated slug: %s", request))
+    end
     
     self.logger:info(string.format("Fetching URL: %s", request))
     self.logger:debug(string.format("fut_get_player_details: %s", request))
@@ -3849,12 +3973,21 @@ function thisFormManager:fut_get_player_details(playerid, fut_fifa, player_name)
     local name = string.match(reply, '<div style="color:[#%S+;|;]+" class="pcdisplay%-name">([%S-? ?]+)</div>')
     local pos = string.match(reply, '<div style="color:[#%S+;|;]+" class="pcdisplay%-pos">([%w]+)</div>')
 
-    local stat1_name, stat1_val = string.match(reply, '<div%A+class="pcdisplay%-ovr1 stat%-val" data%-stat="(%w+)">(%d+)</div>')
-    local stat2_name, stat2_val = string.match(reply, '<div%A+class="pcdisplay%-ovr2 stat%-val" data%-stat="(%w+)">(%d+)</div>')
-    local stat3_name, stat3_val = string.match(reply, '<div%A+class="pcdisplay%-ovr3 stat%-val" data%-stat="(%w+)">(%d+)</div>')
-    local stat4_name, stat4_val = string.match(reply, '<div%A+class="pcdisplay%-ovr4 stat%-val" data%-stat="(%w+)">(%d+)</div>')
-    local stat5_name, stat5_val = string.match(reply, '<div%A+class="pcdisplay%-ovr5 stat%-val" data%-stat="(%w+)">(%d+)</div>')
-    local stat6_name, stat6_val = string.match(reply, '<div%A+class="pcdisplay%-ovr6 stat%-val" data%-stat="(%w+)">(%d+)</div>')
+    local stat1_name, stat1_val = string.match(reply, 'class="pcdisplay%-ovr1[^"]*"[^>]*data%-stat="(%w+)"[^>]*>(%d+)<')
+    local stat2_name, stat2_val = string.match(reply, 'class="pcdisplay%-ovr2[^"]*"[^>]*data%-stat="(%w+)"[^>]*>(%d+)<')
+    local stat3_name, stat3_val = string.match(reply, 'class="pcdisplay%-ovr3[^"]*"[^>]*data%-stat="(%w+)"[^>]*>(%d+)<')
+    local stat4_name, stat4_val = string.match(reply, 'class="pcdisplay%-ovr4[^"]*"[^>]*data%-stat="(%w+)"[^>]*>(%d+)<')
+    local stat5_name, stat5_val = string.match(reply, 'class="pcdisplay%-ovr5[^"]*"[^>]*data%-stat="(%w+)"[^>]*>(%d+)<')
+    local stat6_name, stat6_val = string.match(reply, 'class="pcdisplay%-ovr6[^"]*"[^>]*data%-stat="(%w+)"[^>]*>(%d+)<')
+    
+    self.logger:debug(string.format("Face stats: [%s=%s] [%s=%s] [%s=%s] [%s=%s] [%s=%s] [%s=%s]", 
+        tostring(stat1_name), tostring(stat1_val),
+        tostring(stat2_name), tostring(stat2_val),
+        tostring(stat3_name), tostring(stat3_val),
+        tostring(stat4_name), tostring(stat4_val),
+        tostring(stat5_name), tostring(stat5_val),
+        tostring(stat6_name), tostring(stat6_val)
+    ))
     
     -- Extract originalStats from JavaScript object
     local stat_json_str = string.match(reply, 'let originalStats = ({[^}]+})')
@@ -3994,7 +4127,8 @@ function thisFormManager:fut_create_card(player, idx)
     if not player then return end
 
     local fut_fifa = FIFA - self.frm.FutFIFACB.ItemIndex
-    local player_details = self:fut_get_player_details(player['id'], fut_fifa, player['full_name'])
+    local player_url = player['player_url'] or player['url'] or player['slug']
+    local player_details = self:fut_get_player_details(player['id'], fut_fifa, player['full_name'], player_url)
     self.fut_found_players[idx]['details'] = player_details
 
     -- Cards img
@@ -5254,7 +5388,8 @@ function thisFormManager:onFUTCopyPlayerBtnBtnClick(sender)
 
     if player['details'] == nil then
         local fut_fifa = FIFA - self.frm.FutFIFACB.ItemIndex
-        player['details'] = self:fut_get_player_details(player['id'], fut_fifa, player['full_name'])
+        local player_url = player['player_url'] or player['url'] or player['slug']
+        player['details'] = self:fut_get_player_details(player['id'], fut_fifa, player['full_name'], player_url)
         self.fut_found_players[selected]['details'] = player
     end
 
