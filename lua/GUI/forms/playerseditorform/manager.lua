@@ -3776,13 +3776,36 @@ function thisFormManager:fut_search_player(player_data, page)
     end
 end
 
-function thisFormManager:fut_get_player_details(playerid, fut_fifa)
+function thisFormManager:create_player_slug(player_name)
+    -- Convert player name to URL-friendly slug (lowercase, spaces to hyphens)
+    if not player_name or player_name == "" then
+        self.logger:warning("create_player_slug: player_name is nil or empty")
+        return "unknown"
+    end
+    
+    self.logger:debug(string.format("create_player_slug: input = '%s'", player_name))
+    
+    local slug = string.lower(player_name)
+    slug = string.gsub(slug, ' ', '-')
+    slug = string.gsub(slug, '[^a-z0-9%-]', '')
+    
+    self.logger:debug(string.format("create_player_slug: output = '%s'", slug))
+    
+    return slug
+end
+
+function thisFormManager:fut_get_player_details(playerid, fut_fifa, player_name)
     self.logger:info(string.format("Loading FUT%d player: %d", fut_fifa, playerid))
+    
+    local player_slug = self:create_player_slug(player_name)
     local request = string.format(
-        URL_LINKS['FUT']['player_details'],
+        "https://www.futbin.com/%d/player/%d/%s",
         fut_fifa,
-        playerid
+        playerid,
+        player_slug
     )
+    
+    self.logger:info(string.format("Fetching URL: %s", request))
     self.logger:debug(string.format("fut_get_player_details: %s", request))
     local r = getInternet()
     local reply = r.getURL(request)
@@ -3795,7 +3818,10 @@ function thisFormManager:fut_get_player_details(playerid, fut_fifa)
 
     local base_playerid = string.match(reply, 'data%-baseid="(%d+)"')
     if base_playerid then
-        self.logger:info(string.format("base_playerid: %d", base_playerid))
+        self.logger:info(string.format("base_playerid from HTML: %s", base_playerid))
+    else
+        self.logger:warning("base_playerid not found in HTML, using playerid from URL")
+        base_playerid = tostring(playerid)
     end
 
     local miniface_img = string.match(reply, '<img%s+class="pcdisplay%-picture%-width "%s+id="player_pic"%s+src="(%a+://[%a+%./%d%?%=]+)')
@@ -3829,7 +3855,23 @@ function thisFormManager:fut_get_player_details(playerid, fut_fifa)
     local stat4_name, stat4_val = string.match(reply, '<div%A+class="pcdisplay%-ovr4 stat%-val" data%-stat="(%w+)">(%d+)</div>')
     local stat5_name, stat5_val = string.match(reply, '<div%A+class="pcdisplay%-ovr5 stat%-val" data%-stat="(%w+)">(%d+)</div>')
     local stat6_name, stat6_val = string.match(reply, '<div%A+class="pcdisplay%-ovr6 stat%-val" data%-stat="(%w+)">(%d+)</div>')
-    local stat_json = string.match(reply, '<div style="display: none;" id="player_stats_json">([{"%w:,}]+)</div>')
+    
+    -- Extract originalStats from JavaScript object
+    local stat_json_str = string.match(reply, 'let originalStats = ({[^}]+})')
+    local stat_json = nil
+    
+    if stat_json_str then
+        self.logger:info("Found originalStats in JavaScript")
+        local status, decoded = pcall(json.decode, stat_json_str)
+        if status then
+            stat_json = decoded
+            self.logger:info("Successfully decoded originalStats JSON")
+        else
+            self.logger:warning("Failed to decode originalStats JSON")
+        end
+    else
+        self.logger:warning("Could not find originalStats in HTML")
+    end
 
     local special_img, rev, lvl, rare_type = string.match(reply, '<div id="Player%-card" data%-special%-img="(%d)" data%-revision="([(%w+_?)"|"]+) data%-level="(%w+)" data%-rare%-type="(%d+)"')
 
@@ -3867,18 +3909,53 @@ function thisFormManager:fut_get_player_details(playerid, fut_fifa)
         card_type = string.format('%s-%s', rare_type, rev)
     end
 
+    -- Map futbin stat IDs to attribute names
     if stat_json ~= nil then
-        stat_json = json.decode(stat_json)
-
-        -- Special mapping for GK... 
+        -- Futbin uses numeric IDs for stats, map them to our attribute names
+        local mapped_stats = {
+            acceleration = stat_json["13"],
+            sprintspeed = stat_json["14"],
+            positioning = stat_json["15"],
+            finishing = stat_json["16"],
+            shotpower = stat_json["17"],
+            longshots = stat_json["18"],
+            volleys = stat_json["19"],
+            penalties = stat_json["20"],
+            vision = stat_json["21"],
+            crossing = stat_json["22"],
+            freekickaccuracy = stat_json["23"],
+            shortpassing = stat_json["24"],
+            longpassing = stat_json["25"],
+            curve = stat_json["26"],
+            agility = stat_json["27"],
+            balance = stat_json["28"],
+            reactions = stat_json["29"],
+            ballcontrol = stat_json["30"],
+            dribbling = stat_json["31"],
+            composure = stat_json["32"],
+            interceptions = stat_json["33"],
+            headingaccuracy = stat_json["34"],
+            marking = stat_json["35"],
+            standingtackle = stat_json["36"],
+            slidingtackle = stat_json["37"],
+            jumping = stat_json["38"],
+            stamina = stat_json["39"],
+            strength = stat_json["40"],
+            aggression = stat_json["41"]
+        }
+        
+        -- GK stats (if position is GK, these replace outfield stats)
         if pos == "GK" then
-            stat_json['gkdiving'] = stat_json['ppace']
-            stat_json['gkhandling'] = stat_json['pshooting']
-            stat_json['gkkicking'] = stat_json['ppassing']
-            stat_json['gkreflexes'] = stat_json['pdribbling']
-            stat_json['gkpositioning'] = stat_json['pphysical']
-            stat_json['speed'] = stat_json['pdefending']
+            mapped_stats.gkdiving = stat_json["13"]  -- replaces acceleration in GK stat layout
+            mapped_stats.gkhandling = stat_json["14"]  -- replaces sprintspeed
+            mapped_stats.gkkicking = stat_json["15"]  -- replaces positioning
+            mapped_stats.gkreflexes = stat_json["16"]  -- replaces finishing
+            mapped_stats.gkpositioning = stat_json["17"]  -- replaces shotpower
         end
+        
+        stat_json = mapped_stats
+        
+        self.logger:info("Stats mapped successfully")
     end
 
     self.logger:debug(string.format("Card: %s, card_type: %s", card, card_type))
@@ -3917,7 +3994,7 @@ function thisFormManager:fut_create_card(player, idx)
     if not player then return end
 
     local fut_fifa = FIFA - self.frm.FutFIFACB.ItemIndex
-    local player_details = self:fut_get_player_details(player['id'], fut_fifa)
+    local player_details = self:fut_get_player_details(player['id'], fut_fifa, player['full_name'])
     self.fut_found_players[idx]['details'] = player_details
 
     -- Cards img
@@ -4252,6 +4329,11 @@ end
 
 function thisFormManager:fut_copy_card_to_gui(player)
     self.logger:info("fut_copy_card_to_gui")
+    
+    -- Check if we have stat_json from futbin
+    local has_stat_json = player['details'] and player['details']['stat_json'] ~= nil
+    self.logger:info(string.format("Has stat_json from futbin: %s", tostring(has_stat_json)))
+    
     local comp_to_column = {
         FirstNameIDEdit = 'firstnameid',
         LastNameIDEdit = 'lastnameid',
@@ -4488,7 +4570,82 @@ function thisFormManager:fut_copy_card_to_gui(player)
 
 
     local comps_desc = self:get_components_description()
+    
+    -- Use stat_json from futbin if available, otherwise fall back to CSV
+    if has_stat_json then
+        self.logger:info("Using stats from futbin originalStats")
+        local stat_json = player['details']['stat_json']
+        
+        -- Copy attributes from stat_json
+        if self.frm.FUTCopyAttribsCB.State == 0 then
+            -- Map stat names to GUI component names
+            local stat_map = {
+                acceleration = "AccelerationEdit",
+                sprintspeed = "SprintSpeedEdit",
+                positioning = "AttackPositioningEdit",
+                finishing = "FinishingEdit",
+                shotpower = "ShotPowerEdit",
+                longshots = "LongShotsEdit",
+                volleys = "VolleysEdit",
+                penalties = "PenaltiesEdit",
+                vision = "VisionEdit",
+                crossing = "CrossingEdit",
+                freekickaccuracy = "FreeKickAccuracyEdit",
+                shortpassing = "ShortPassingEdit",
+                longpassing = "LongPassingEdit",
+                curve = "CurveEdit",
+                agility = "AgilityEdit",
+                balance = "BalanceEdit",
+                reactions = "ReactionsEdit",
+                ballcontrol = "BallControlEdit",
+                dribbling = "DribblingEdit",
+                composure = "ComposureEdit",
+                interceptions = "InterceptionsEdit",
+                headingaccuracy = "HeadingAccuracyEdit",
+                marking = "MarkingEdit",
+                standingtackle = "StandingTackleEdit",
+                slidingtackle = "SlidingTackleEdit",
+                jumping = "JumpingEdit",
+                stamina = "StaminaEdit",
+                strength = "StrengthEdit",
+                aggression = "AggressionEdit",
+                gkdiving = "GKDivingEdit",
+                gkhandling = "GKHandlingEdit",
+                gkkicking = "GKKickingEdit",
+                gkreflexes = "GKReflexEdit",
+                gkpositioning = "GKPositioningEdit"
+            }
+            
+            -- Copy each stat to GUI
+            for stat_name, component_name in pairs(stat_map) do
+                local stat_value = stat_json[stat_name]
+                if stat_value ~= nil then
+                    self.frm[component_name].Text = stat_value
+                    self.change_list[component_name] = stat_value
+                    self.logger:debug(string.format("%s = %d", component_name, stat_value))
+                end
+            end
+        end
+        
+        -- Recalculate OVR for best at positions
+        self.change_list["OverallEdit"] = 1
+        self:recalculate_ovr(false)
+        
+        self.has_unsaved_changes = true
+        ShowMessage('Data from FUT has been copied to GUI.\\nTo see the changes in game you need to \"Apply Changes\"')
+        return true
+    end
+    
+    -- Fallback to CSV file if stat_json not available
+    self.logger:info("Falling back to CSV file for stats")
     local fut_players_file_path = "other/fut/base_fut_players.csv"
+    local csv_file_exists = pcall(io.open, fut_players_file_path, "r")
+    if not csv_file_exists then
+        self.logger:critical('CSV file not found and no stat_json available')
+        showMessage(string.format("Player ID %d: Could not load stats from futbin and CSV file not found.\\n\\nThe card was displayed but attributes cannot be copied.", playerid))
+        return false
+    end
+    
     for line in io.lines(fut_players_file_path) do
         local values = split(line, ',')
         local f_playerid = tonumber(values[CLONE_COLUMNS['playerid']])
@@ -5070,12 +5227,17 @@ function thisFormManager:fut_copy_card_to_gui(player)
             ShowMessage('Data from FUT has been copied to GUI.\nTo see the changes in game you need to "Apply Changes"')
             return true
         elseif f_playerid > playerid then
-            -- Not found
-            self.logger:critical('COPY ERROR\n Player not Found: ' .. playerid)
-            return false
+            -- Not found in CSV
+            self.logger:warning(string.format("Player %d not found in CSV (next playerid in file: %d)", playerid, f_playerid))
+            break
         end
         ::continue::
     end
+    
+    -- If we reach here, player was not found in CSV
+    self.logger:critical('Player not found in CSV: ' .. playerid)
+    showMessage(string.format("Player ID %d not found in CSV.\\n\\nThe card was displayed but attributes cannot be copied without CSV data.", playerid))
+    return false
 end
 
 function thisFormManager:onFUTCopyPlayerBtnBtnClick(sender)
@@ -5092,7 +5254,7 @@ function thisFormManager:onFUTCopyPlayerBtnBtnClick(sender)
 
     if player['details'] == nil then
         local fut_fifa = FIFA - self.frm.FutFIFACB.ItemIndex
-        player['details'] = self:fut_get_player_details(player['id'], fut_fifa)
+        player['details'] = self:fut_get_player_details(player['id'], fut_fifa, player['full_name'])
         self.fut_found_players[selected]['details'] = player
     end
 
