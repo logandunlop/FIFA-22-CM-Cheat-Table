@@ -485,3 +485,312 @@
 [ INFO ] Wed Dec 10 14:57:09 2025 - fut_copy_card_to_gui finished
 [ INFO ] Wed Dec 10 14:59:23 2025 - Deactivating all scripts
 [ INFO ] Wed Dec 10 14:59:24 2025 - Deactivated all scripts
+[ INFO ] Wed Dec 10 14:59:55 2025 - ================================
+[ INFO ] Wed Dec 10 14:59:55 2025 - =========== INITIALIZE =========
+[ INFO ] Wed Dec 10 14:59:55 2025 - ================================
+[ INFO ] Wed Dec 10 14:59:55 2025 - os.getenv('HOMEDRIVE') C:
+[ INFO ] Wed Dec 10 14:59:55 2025 - os.getenv('SystemDrive') C:
+[ INFO ] Wed Dec 10 14:59:55 2025 - HOMEDRIVE: C:
+[ INFO ] Wed Dec 10 14:59:55 2025 - Using cwd Config
+[ INFO ] Wed Dec 10 14:59:56 2025 - Loading CFG_DATA from config.ini
+[ INFO ] Wed Dec 10 14:59:56 2025 - Loading OFFSETS_DATA from offsets.ini
+[ INFO ] Wed Dec 10 14:59:56 2025 - Setup Form Manager: main_form
+[ INFO ] Wed Dec 10 14:59:56 2025 - Setup Form Manager: settings_form
+[ INFO ] Wed Dec 10 14:59:56 2025 - Setup Form Manager: playerseditor_form
+[ INFO ] Wed Dec 10 14:59:56 2025 - Setup Form Manager: newmatchfix_form
+[ INFO ] Wed Dec 10 14:59:56 2025 - Setup Form Manager: teamseditor_form
+[ INFO ] Wed Dec 10 14:59:56 2025 - Resize teams editor: teamseditor_form
+[ INFO ] Wed Dec 10 14:59:56 2025 - Setup Form Manager: transferplayers_form
+[ INFO ] Wed Dec 10 14:59:56 2025 - Setup Form Manager: findteam_form
+[ INFO ] Wed Dec 10 14:59:56 2025 - Setup Form Manager: findplayer_form
+[ INFO ] Wed Dec 10 14:59:56 2025 - Setup Form Manager: matchscheduleeditor_form
+[ INFO ] Wed Dec 10 14:59:56 2025 - Setup Form Manager: matchfixing_form
+[ INFO ] Wed Dec 10 14:59:56 2025 - Cheat engine version: 7.600000
+[ INFO ] Wed Dec 10 14:59:56 2025 - Cheat Table version: 22.1.1.6
+[ INFO ] Wed Dec 10 14:59:56 2025 - Searching for game process
+[ INFO ] Wed Dec 10 14:59:58 2025 - Attached to FIFA22.exe (PID: 34976)
+[ INFO ] Wed Dec 10 14:59:58 2025 - Patrons ver -  22.1.1.6, free ver - 
+22.1.1.6
+[ INFO ] Wed Dec 10 14:59:59 2025 - Veryfing ScreenID offset
+[ INFO ] Wed Dec 10 14:59:59 2025 - addres_to_check 1415C3E12, aob: 4C 8D 3D ?? ?? ?? ?? C1 E8 07 49 8B F4 A8 01 4C 0F 45 3D
+[ INFO ] Wed Dec 10 14:59:59 2025 - Veryfing ScreenID offset success
+[ INFO ] Wed Dec 10 14:59:59 2025 - Current Screen: mainhubG5cfg
+[ INFO ] Wed Dec 10 14:59:59 2025 - Waiting for valid screen
+[ INFO ] Wed Dec 10 15:00:00 2025 - Current Screen: mainhubG5cfg
+[ INFO ] Wed Dec 10 15:00:00 2025 - Loading playernames: other/playernames.csv
+[ INFO ] Wed Dec 10 15:00:00 2025 - Playernames loaded.
+[ INFO ] Wed Dec 10 15:00:00 2025 - Saving Config to config.ini
+[ INFO ] Wed Dec 10 15:00:00 2025 - Activating Globals (14)
+[ INFO ] Wed Dec 10 15:00:00 2025 - Activating Scripts (18)
+[ INFO ] Wed Dec 10 15:00:00 2025 - Activating Hidden FIFA DB Tables (214)
+[ INFO ] Wed Dec 10 15:00:00 2025 - Veryfing fnGetColData offset
+[ INFO ] Wed Dec 10 15:00:00 2025 - addres_to_check 142F65EA0, aob: 40 53 48 83 EC 30 4C 8B D2 4D 8B D8 8B 12 8D 42 FD 83 F8 01
+[ INFO ] Wed Dec 10 15:00:00 2025 - Veryfing fnGetColData offset success
+[ INFO ] Wed Dec 10 15:00:00 2025 - Activating Scripts (18)
+[ INFO ] Wed Dec 10 15:00:00 2025 - Activating Hidden FIFA DB Tables (214)
+[ INFO ] Wed Dec 10 15:00:00 2025 - Veryfing DatabaseBasePtr offset
+[ INFO ] Wed Dec 10 15:00:00 2025 - addres_to_check 142F6BA6F, aob: 48 0F 44 2D ?? ?? ?? ?? 45 33 FF 8B 4D 08 8B F1 0F AF 75 00 8D 41 01
+[ INFO ] Wed Dec 10 15:00:00 2025 - Veryfing DatabaseBasePtr offset success
+[ INFO ] Wed Dec 10 15:00:00 2025 - Veryfing pModeManagers offset
+[ INFO ] Wed Dec 10 15:00:00 2025 - addres_to_check 146280198, aob: 4C 89 3D ?? ?? ?? ?? 48 89 3D ?? ?? ?? ?? EB 03 48 8B C3
+[ INFO ] Wed Dec 10 15:00:00 2025 - Veryfing pModeManagers offset success
+[ INFO ] Wed Dec 10 15:00:00 2025 - Veryfing fnGenYAReport offset
+[ INFO ] Wed Dec 10 15:00:00 2025 - addres_to_check 145EDE1C0, aob: 40 55 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 01 48 8B F9 FF 50 08 84 C0 0F 84 ?? ?? ?? ?? 48 8B 57 08 48 89 9C 24 ?? ?? ?? ?? 4C 89 B4 24 ?? ?? ?? ??
+[ INFO ] Wed Dec 10 15:00:00 2025 - Veryfing fnGenYAReport offset success
+[ INFO ] Wed Dec 10 15:00:00 2025 - load_img: heads/p41.png, https://fifatracker-cdn.fra1.digitaloceanspaces.com/img/assets/26/heads/p41.png
+[ INFO ] Wed Dec 10 15:00:00 2025 - load_img: crest/l1.png, https://fifatracker-cdn.fra1.digitaloceanspaces.com/img/assets/26/crest/dark/l1.png
+[ INFO ] Wed Dec 10 15:00:00 2025 - Ready to use.
+[ INFO ] Wed Dec 10 15:25:26 2025 - Veryfing DatabaseBasePtr offset
+[ INFO ] Wed Dec 10 15:25:26 2025 - addres_to_check 142F6BA6F, aob: 48 0F 44 2D ?? ?? ?? ?? 45 33 FF 8B 4D 08 8B F1 0F AF 75 00 8D 41 01
+[ INFO ] Wed Dec 10 15:25:26 2025 - Veryfing DatabaseBasePtr offset success
+[ INFO ] Wed Dec 10 15:25:26 2025 - Veryfing pModeManagers offset
+[ INFO ] Wed Dec 10 15:25:26 2025 - addres_to_check 146280198, aob: 4C 89 3D ?? ?? ?? ?? 48 89 3D ?? ?? ?? ?? EB 03 48 8B C3
+[ INFO ] Wed Dec 10 15:25:26 2025 - Veryfing pModeManagers offset success
+[ INFO ] Wed Dec 10 15:25:26 2025 - Cache Player Names
+[ INFO ] Wed Dec 10 15:25:27 2025 - Cache Player Names Done
+[ INFO ] Wed Dec 10 15:25:27 2025 - load_img: heads/p27.png, https://fifatracker-cdn.fra1.digitaloceanspaces.com/img/assets/26/heads/p27.png
+[ WARNING ] Wed Dec 10 15:25:27 2025 - No club teams for playerid: 27
+[ WARNING ] Wed Dec 10 15:25:34 2025 - Futbin API JSON decode failed. Falling back to HTML scraping...
+[ INFO ] Wed Dec 10 15:25:34 2025 - FUT HTML search: https://www.futbin.com/26/players?page=1&search=cole
+[ INFO ] Wed Dec 10 15:25:34 2025 - Saved HTML response to logs/futbin_search_debug.html for inspection
+[ INFO ] Wed Dec 10 15:25:35 2025 - Found 24 players from HTML
+[ INFO ] Wed Dec 10 15:25:36 2025 - Loading FUT26 player: 20796
+[ INFO ] Wed Dec 10 15:25:36 2025 - Using URL from search: https://www.futbin.com/26/player/20796/cole-palmer
+[ INFO ] Wed Dec 10 15:25:36 2025 - Fetching URL: https://www.futbin.com/26/player/20796/cole-palmer
+[ INFO ] Wed Dec 10 15:25:37 2025 - Reply len: 1079712
+[ WARNING ] Wed Dec 10 15:25:37 2025 - base_playerid not found in HTML, using playerid from URL
+[ INFO ] Wed Dec 10 15:25:37 2025 - club_img not found
+[ INFO ] Wed Dec 10 15:25:37 2025 - nation_img not found
+[ INFO ] Wed Dec 10 15:25:37 2025 - Found originalStats in JavaScript
+[ INFO ] Wed Dec 10 15:25:37 2025 - Successfully decoded originalStats JSON
+[ INFO ] Wed Dec 10 15:25:37 2025 - Stats mapped successfully
+[ INFO ] Wed Dec 10 15:25:37 2025 - Loading FUT26 player: 20796 Finished
+[ INFO ] Wed Dec 10 15:25:37 2025 - load_img: ut/cards_bg/1_gold.png, https://cdn.futbin.com/content/fifa22/img/cards/1_gold.png?v=138
+[ INFO ] Wed Dec 10 15:25:37 2025 - load_img: flags/f0.png, nil
+[ INFO ] Wed Dec 10 15:25:37 2025 - load_img: crest/l0.png, nil
+[ WARNING ] Wed Dec 10 15:27:04 2025 - Futbin API JSON decode failed. Falling back to HTML scraping...
+[ INFO ] Wed Dec 10 15:27:04 2025 - FUT HTML search: https://www.futbin.com/26/players?page=1&search=cole
+[ INFO ] Wed Dec 10 15:27:05 2025 - Saved HTML response to logs/futbin_search_debug.html for inspection
+[ INFO ] Wed Dec 10 15:27:05 2025 - Found 24 players from HTML
+[ INFO ] Wed Dec 10 16:10:13 2025 - Deactivating all scripts
+[ INFO ] Wed Dec 10 16:10:13 2025 - Deactivated all scripts
+[ INFO ] Wed Dec 10 16:38:18 2025 - ================================
+[ INFO ] Wed Dec 10 16:38:18 2025 - =========== INITIALIZE =========
+[ INFO ] Wed Dec 10 16:38:18 2025 - ================================
+[ INFO ] Wed Dec 10 16:38:18 2025 - os.getenv('HOMEDRIVE') C:
+[ INFO ] Wed Dec 10 16:38:18 2025 - os.getenv('SystemDrive') C:
+[ INFO ] Wed Dec 10 16:38:18 2025 - HOMEDRIVE: C:
+[ INFO ] Wed Dec 10 16:38:19 2025 - Using cwd Config
+[ INFO ] Wed Dec 10 16:38:19 2025 - Loading CFG_DATA from config.ini
+[ INFO ] Wed Dec 10 16:38:19 2025 - Loading OFFSETS_DATA from offsets.ini
+[ INFO ] Wed Dec 10 16:38:19 2025 - Setup Form Manager: settings_form
+[ INFO ] Wed Dec 10 16:38:19 2025 - Setup Form Manager: findteam_form
+[ INFO ] Wed Dec 10 16:38:19 2025 - Setup Form Manager: teamseditor_form
+[ INFO ] Wed Dec 10 16:38:19 2025 - Resize teams editor: teamseditor_form
+[ INFO ] Wed Dec 10 16:38:19 2025 - Setup Form Manager: matchfixing_form
+[ INFO ] Wed Dec 10 16:38:19 2025 - Setup Form Manager: matchscheduleeditor_form
+[ INFO ] Wed Dec 10 16:38:19 2025 - Setup Form Manager: findplayer_form
+[ INFO ] Wed Dec 10 16:38:19 2025 - Setup Form Manager: transferplayers_form
+[ INFO ] Wed Dec 10 16:38:19 2025 - Setup Form Manager: main_form
+[ INFO ] Wed Dec 10 16:38:19 2025 - Setup Form Manager: playerseditor_form
+[ INFO ] Wed Dec 10 16:38:19 2025 - Setup Form Manager: newmatchfix_form
+[ INFO ] Wed Dec 10 16:38:19 2025 - Cheat engine version: 7.600000
+[ INFO ] Wed Dec 10 16:38:19 2025 - Cheat Table version: 22.1.1.6
+[ INFO ] Wed Dec 10 16:38:19 2025 - Searching for game process
+[ INFO ] Wed Dec 10 16:38:21 2025 - Attached to FIFA22.exe (PID: 35968)
+[ INFO ] Wed Dec 10 16:38:22 2025 - Patrons ver -  22.1.1.6, free ver - 
+22.1.1.6
+[ INFO ] Wed Dec 10 16:38:23 2025 - Veryfing ScreenID offset
+[ INFO ] Wed Dec 10 16:38:23 2025 - addres_to_check 1415C3E12, aob: 4C 8D 3D ?? ?? ?? ?? C1 E8 07 49 8B F4 A8 01 4C 0F 45 3D
+[ INFO ] Wed Dec 10 16:38:23 2025 - Veryfing ScreenID offset success
+[ INFO ] Wed Dec 10 16:38:23 2025 - Current Screen: mainhubG5cfg
+[ INFO ] Wed Dec 10 16:38:23 2025 - Waiting for valid screen
+[ INFO ] Wed Dec 10 16:38:23 2025 - Current Screen: mainhubG5cfg
+[ INFO ] Wed Dec 10 16:38:23 2025 - Loading playernames: other/playernames.csv
+[ INFO ] Wed Dec 10 16:38:23 2025 - Playernames loaded.
+[ INFO ] Wed Dec 10 16:38:23 2025 - Saving Config to config.ini
+[ INFO ] Wed Dec 10 16:38:23 2025 - Activating Globals (14)
+[ INFO ] Wed Dec 10 16:38:23 2025 - Activating Scripts (18)
+[ INFO ] Wed Dec 10 16:38:23 2025 - Activating Hidden FIFA DB Tables (214)
+[ INFO ] Wed Dec 10 16:38:23 2025 - Veryfing fnGetColData offset
+[ INFO ] Wed Dec 10 16:38:23 2025 - addres_to_check 142F65EA0, aob: 40 53 48 83 EC 30 4C 8B D2 4D 8B D8 8B 12 8D 42 FD 83 F8 01
+[ INFO ] Wed Dec 10 16:38:23 2025 - Veryfing fnGetColData offset success
+[ INFO ] Wed Dec 10 16:38:23 2025 - Activating Scripts (18)
+[ INFO ] Wed Dec 10 16:38:23 2025 - Activating Hidden FIFA DB Tables (214)
+[ INFO ] Wed Dec 10 16:38:23 2025 - Veryfing DatabaseBasePtr offset
+[ INFO ] Wed Dec 10 16:38:23 2025 - addres_to_check 142F6BA6F, aob: 48 0F 44 2D ?? ?? ?? ?? 45 33 FF 8B 4D 08 8B F1 0F AF 75 00 8D 41 01
+[ INFO ] Wed Dec 10 16:38:23 2025 - Veryfing DatabaseBasePtr offset success
+[ INFO ] Wed Dec 10 16:38:23 2025 - Veryfing pModeManagers offset
+[ INFO ] Wed Dec 10 16:38:23 2025 - addres_to_check 146280198, aob: 4C 89 3D ?? ?? ?? ?? 48 89 3D ?? ?? ?? ?? EB 03 48 8B C3
+[ INFO ] Wed Dec 10 16:38:23 2025 - Veryfing pModeManagers offset success
+[ INFO ] Wed Dec 10 16:38:23 2025 - Veryfing fnGenYAReport offset
+[ INFO ] Wed Dec 10 16:38:23 2025 - addres_to_check 145EDE1C0, aob: 40 55 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 01 48 8B F9 FF 50 08 84 C0 0F 84 ?? ?? ?? ?? 48 8B 57 08 48 89 9C 24 ?? ?? ?? ?? 4C 89 B4 24 ?? ?? ?? ??
+[ INFO ] Wed Dec 10 16:38:23 2025 - Veryfing fnGenYAReport offset success
+[ INFO ] Wed Dec 10 16:38:23 2025 - load_img: heads/p41.png, https://fifatracker-cdn.fra1.digitaloceanspaces.com/img/assets/26/heads/p41.png
+[ INFO ] Wed Dec 10 16:38:23 2025 - load_img: crest/l1.png, https://fifatracker-cdn.fra1.digitaloceanspaces.com/img/assets/26/crest/dark/l1.png
+[ INFO ] Wed Dec 10 16:38:24 2025 - Ready to use.
+[ INFO ] Wed Dec 10 16:38:27 2025 - Veryfing DatabaseBasePtr offset
+[ INFO ] Wed Dec 10 16:38:27 2025 - addres_to_check 142F6BA6F, aob: 48 0F 44 2D ?? ?? ?? ?? 45 33 FF 8B 4D 08 8B F1 0F AF 75 00 8D 41 01
+[ INFO ] Wed Dec 10 16:38:27 2025 - Veryfing DatabaseBasePtr offset success
+[ INFO ] Wed Dec 10 16:38:27 2025 - Veryfing pModeManagers offset
+[ INFO ] Wed Dec 10 16:38:27 2025 - addres_to_check 146280198, aob: 4C 89 3D ?? ?? ?? ?? 48 89 3D ?? ?? ?? ?? EB 03 48 8B C3
+[ INFO ] Wed Dec 10 16:38:27 2025 - Veryfing pModeManagers offset success
+[ INFO ] Wed Dec 10 16:38:27 2025 - Cache Player Names
+[ INFO ] Wed Dec 10 16:38:27 2025 - Cache Player Names Done
+[ INFO ] Wed Dec 10 16:38:27 2025 - load_img: heads/p27.png, https://fifatracker-cdn.fra1.digitaloceanspaces.com/img/assets/26/heads/p27.png
+[ WARNING ] Wed Dec 10 16:38:27 2025 - No club teams for playerid: 27
+[ INFO ] Wed Dec 10 16:38:36 2025 - Veryfing DatabaseBasePtr offset
+[ INFO ] Wed Dec 10 16:38:36 2025 - addres_to_check 142F6BA6F, aob: 48 0F 44 2D ?? ?? ?? ?? 45 33 FF 8B 4D 08 8B F1 0F AF 75 00 8D 41 01
+[ INFO ] Wed Dec 10 16:38:36 2025 - Veryfing DatabaseBasePtr offset success
+[ INFO ] Wed Dec 10 16:38:36 2025 - Veryfing pModeManagers offset
+[ INFO ] Wed Dec 10 16:38:36 2025 - addres_to_check 146280198, aob: 4C 89 3D ?? ?? ?? ?? 48 89 3D ?? ?? ?? ?? EB 03 48 8B C3
+[ INFO ] Wed Dec 10 16:38:36 2025 - Veryfing pModeManagers offset success
+[ INFO ] Wed Dec 10 16:38:36 2025 - Cache Player Names
+[ INFO ] Wed Dec 10 16:38:37 2025 - Cache Player Names Done
+[ INFO ] Wed Dec 10 16:38:37 2025 - load_img: heads/p255253.png, https://fifatracker-cdn.fra1.digitaloceanspaces.com/img/assets/26/heads/p255253.png
+[ INFO ] Wed Dec 10 16:38:37 2025 - load_img: heads/notfound.png, https://fifatracker-cdn.fra1.digitaloceanspaces.com/img/assets/common/heads/notfound.png
+[ INFO ] Wed Dec 10 16:38:37 2025 - load_img: crest/l73.png, https://fifatracker-cdn.fra1.digitaloceanspaces.com/img/assets/26/crest/dark/l73.png
+[ INFO ] Wed Dec 10 16:38:38 2025 - load_img: crest/notfound.png, https://fifatracker-cdn.fra1.digitaloceanspaces.com/img/assets/common/crest/notfound.png
+[ WARNING ] Wed Dec 10 16:38:58 2025 - Futbin API JSON decode failed. Falling back to HTML scraping...
+[ INFO ] Wed Dec 10 16:38:58 2025 - FUT HTML search: https://www.futbin.com/26/players?page=1&search=vitinha
+[ INFO ] Wed Dec 10 16:39:00 2025 - Saved HTML response to logs/futbin_search_debug.html for inspection
+[ INFO ] Wed Dec 10 16:39:00 2025 - Found 5 players from HTML
+[ WARNING ] Wed Dec 10 16:39:03 2025 - Futbin API JSON decode failed. Falling back to HTML scraping...
+[ INFO ] Wed Dec 10 16:39:03 2025 - FUT HTML search: https://www.futbin.com/25/players?page=1&search=vitinha
+[ INFO ] Wed Dec 10 16:39:04 2025 - Saved HTML response to logs/futbin_search_debug.html for inspection
+[ INFO ] Wed Dec 10 16:39:04 2025 - Found 7 players from HTML
+[ INFO ] Wed Dec 10 16:39:05 2025 - Loading FUT25 player: 60963
+[ INFO ] Wed Dec 10 16:39:05 2025 - Using URL from search: https://www.futbin.com/25/player/60963/vitor-machado-ferreira
+[ INFO ] Wed Dec 10 16:39:05 2025 - Fetching URL: https://www.futbin.com/25/player/60963/vitor-machado-ferreira
+[ INFO ] Wed Dec 10 16:39:06 2025 - Reply len: 1770510
+[ WARNING ] Wed Dec 10 16:39:06 2025 - base_playerid not found in HTML, using playerid from URL
+[ INFO ] Wed Dec 10 16:39:06 2025 - club_img not found
+[ INFO ] Wed Dec 10 16:39:06 2025 - nation_img not found
+[ INFO ] Wed Dec 10 16:39:06 2025 - Found originalStats in JavaScript
+[ INFO ] Wed Dec 10 16:39:06 2025 - Successfully decoded originalStats JSON
+[ INFO ] Wed Dec 10 16:39:06 2025 - Stats mapped successfully
+[ INFO ] Wed Dec 10 16:39:06 2025 - Loading FUT25 player: 60963 Finished
+[ INFO ] Wed Dec 10 16:39:06 2025 - load_img: ut/cards_bg/1_gold.png, https://cdn.futbin.com/content/fifa22/img/cards/1_gold.png?v=138
+[ INFO ] Wed Dec 10 16:39:06 2025 - load_img: flags/f0.png, nil
+[ INFO ] Wed Dec 10 16:39:06 2025 - load_img: crest/l0.png, nil
+[ INFO ] Wed Dec 10 16:41:09 2025 - fut_copy_card_to_gui
+[ INFO ] Wed Dec 10 16:41:09 2025 - Has stat_json from futbin: true
+[ INFO ] Wed Dec 10 16:41:09 2025 - fut_copy_card_to_gui, playerid: 60963
+[ INFO ] Wed Dec 10 16:41:09 2025 - Using stats from futbin originalStats
+[ INFO ] Wed Dec 10 16:41:12 2025 - Applying chem style index 17
+[ INFO ] Wed Dec 10 16:41:14 2025 - fut_copy_card_to_gui finished
+[ INFO ] Wed Dec 10 16:43:04 2025 - Apply Changes player
+[ INFO ] Wed Dec 10 16:43:06 2025 - Player with ID 255253 has been edited
+[ INFO ] Wed Dec 10 16:43:55 2025 - Deactivating all scripts
+[ INFO ] Wed Dec 10 16:43:55 2025 - Deactivated all scripts
+[ INFO ] Wed Dec 10 16:45:37 2025 - ================================
+[ INFO ] Wed Dec 10 16:45:37 2025 - =========== INITIALIZE =========
+[ INFO ] Wed Dec 10 16:45:37 2025 - ================================
+[ INFO ] Wed Dec 10 16:45:37 2025 - os.getenv('HOMEDRIVE') C:
+[ INFO ] Wed Dec 10 16:45:37 2025 - os.getenv('SystemDrive') C:
+[ INFO ] Wed Dec 10 16:45:37 2025 - HOMEDRIVE: C:
+[ INFO ] Wed Dec 10 16:45:37 2025 - Using cwd Config
+[ INFO ] Wed Dec 10 16:45:37 2025 - Loading CFG_DATA from config.ini
+[ INFO ] Wed Dec 10 16:45:37 2025 - Loading OFFSETS_DATA from offsets.ini
+[ INFO ] Wed Dec 10 16:45:37 2025 - Setup Form Manager: main_form
+[ INFO ] Wed Dec 10 16:45:37 2025 - Setup Form Manager: findplayer_form
+[ INFO ] Wed Dec 10 16:45:37 2025 - Setup Form Manager: matchfixing_form
+[ INFO ] Wed Dec 10 16:45:37 2025 - Setup Form Manager: playerseditor_form
+[ INFO ] Wed Dec 10 16:45:37 2025 - Setup Form Manager: transferplayers_form
+[ INFO ] Wed Dec 10 16:45:37 2025 - Setup Form Manager: settings_form
+[ INFO ] Wed Dec 10 16:45:37 2025 - Setup Form Manager: newmatchfix_form
+[ INFO ] Wed Dec 10 16:45:37 2025 - Setup Form Manager: matchscheduleeditor_form
+[ INFO ] Wed Dec 10 16:45:37 2025 - Setup Form Manager: findteam_form
+[ INFO ] Wed Dec 10 16:45:38 2025 - Setup Form Manager: teamseditor_form
+[ INFO ] Wed Dec 10 16:45:38 2025 - Resize teams editor: teamseditor_form
+[ INFO ] Wed Dec 10 16:45:38 2025 - Cheat engine version: 7.600000
+[ INFO ] Wed Dec 10 16:45:38 2025 - Cheat Table version: 22.1.1.6
+[ INFO ] Wed Dec 10 16:45:38 2025 - Searching for game process
+[ INFO ] Wed Dec 10 16:45:40 2025 - Attached to FIFA22.exe (PID: 45948)
+[ INFO ] Wed Dec 10 16:45:40 2025 - Patrons ver -  22.1.1.6, free ver - 
+22.1.1.6
+[ INFO ] Wed Dec 10 16:45:41 2025 - Veryfing ScreenID offset
+[ INFO ] Wed Dec 10 16:45:41 2025 - addres_to_check 1415C3E12, aob: 4C 8D 3D ?? ?? ?? ?? C1 E8 07 49 8B F4 A8 01 4C 0F 45 3D
+[ INFO ] Wed Dec 10 16:45:41 2025 - Veryfing ScreenID offset success
+[ INFO ] Wed Dec 10 16:45:41 2025 - Current Screen: TeamSheetSelection
+[ INFO ] Wed Dec 10 16:45:41 2025 - Waiting for valid screen
+[ INFO ] Wed Dec 10 16:45:41 2025 - Current Screen: TeamSheetSelection
+[ INFO ] Wed Dec 10 16:45:41 2025 - Loading playernames: other/playernames.csv
+[ INFO ] Wed Dec 10 16:45:41 2025 - Playernames loaded.
+[ INFO ] Wed Dec 10 16:45:41 2025 - Saving Config to config.ini
+[ INFO ] Wed Dec 10 16:45:41 2025 - Activating Globals (14)
+[ INFO ] Wed Dec 10 16:45:41 2025 - Activating Scripts (18)
+[ INFO ] Wed Dec 10 16:45:41 2025 - Activating Hidden FIFA DB Tables (214)
+[ INFO ] Wed Dec 10 16:45:41 2025 - Veryfing fnGetColData offset
+[ INFO ] Wed Dec 10 16:45:41 2025 - addres_to_check 142F65EA0, aob: 40 53 48 83 EC 30 4C 8B D2 4D 8B D8 8B 12 8D 42 FD 83 F8 01
+[ INFO ] Wed Dec 10 16:45:41 2025 - Veryfing fnGetColData offset success
+[ INFO ] Wed Dec 10 16:45:41 2025 - Activating Scripts (18)
+[ INFO ] Wed Dec 10 16:45:41 2025 - Activating Hidden FIFA DB Tables (214)
+[ INFO ] Wed Dec 10 16:45:41 2025 - Veryfing DatabaseBasePtr offset
+[ INFO ] Wed Dec 10 16:45:41 2025 - addres_to_check 142F6BA6F, aob: 48 0F 44 2D ?? ?? ?? ?? 45 33 FF 8B 4D 08 8B F1 0F AF 75 00 8D 41 01
+[ INFO ] Wed Dec 10 16:45:41 2025 - Veryfing DatabaseBasePtr offset success
+[ INFO ] Wed Dec 10 16:45:42 2025 - Veryfing pModeManagers offset
+[ INFO ] Wed Dec 10 16:45:42 2025 - addres_to_check 146280198, aob: 4C 89 3D ?? ?? ?? ?? 48 89 3D ?? ?? ?? ?? EB 03 48 8B C3
+[ INFO ] Wed Dec 10 16:45:42 2025 - Veryfing pModeManagers offset success
+[ INFO ] Wed Dec 10 16:45:42 2025 - Veryfing fnGenYAReport offset
+[ INFO ] Wed Dec 10 16:45:42 2025 - addres_to_check 145EDE1C0, aob: 40 55 57 48 8D 6C 24 ?? 48 81 EC ?? ?? ?? ?? 48 8B 01 48 8B F9 FF 50 08 84 C0 0F 84 ?? ?? ?? ?? 48 8B 57 08 48 89 9C 24 ?? ?? ?? ?? 4C 89 B4 24 ?? ?? ?? ??
+[ INFO ] Wed Dec 10 16:45:42 2025 - Veryfing fnGenYAReport offset success
+[ INFO ] Wed Dec 10 16:45:42 2025 - load_img: heads/p41.png, https://fifatracker-cdn.fra1.digitaloceanspaces.com/img/assets/26/heads/p41.png
+[ INFO ] Wed Dec 10 16:45:42 2025 - load_img: crest/l1.png, https://fifatracker-cdn.fra1.digitaloceanspaces.com/img/assets/26/crest/dark/l1.png
+[ INFO ] Wed Dec 10 16:45:42 2025 - Ready to use.
+[ INFO ] Wed Dec 10 16:45:45 2025 - Veryfing DatabaseBasePtr offset
+[ INFO ] Wed Dec 10 16:45:45 2025 - addres_to_check 142F6BA6F, aob: 48 0F 44 2D ?? ?? ?? ?? 45 33 FF 8B 4D 08 8B F1 0F AF 75 00 8D 41 01
+[ INFO ] Wed Dec 10 16:45:45 2025 - Veryfing DatabaseBasePtr offset success
+[ INFO ] Wed Dec 10 16:45:45 2025 - Veryfing pModeManagers offset
+[ INFO ] Wed Dec 10 16:45:45 2025 - addres_to_check 146280198, aob: 4C 89 3D ?? ?? ?? ?? 48 89 3D ?? ?? ?? ?? EB 03 48 8B C3
+[ INFO ] Wed Dec 10 16:45:45 2025 - Veryfing pModeManagers offset success
+[ INFO ] Wed Dec 10 16:45:45 2025 - Cache Player Names
+[ INFO ] Wed Dec 10 16:45:45 2025 - Cache Player Names Done
+[ INFO ] Wed Dec 10 16:45:46 2025 - load_img: heads/p7137.png, https://fifatracker-cdn.fra1.digitaloceanspaces.com/img/assets/26/heads/p7137.png
+[ INFO ] Wed Dec 10 16:45:46 2025 - load_img: heads/notfound.png, https://fifatracker-cdn.fra1.digitaloceanspaces.com/img/assets/common/heads/notfound.png
+[ INFO ] Wed Dec 10 16:45:46 2025 - load_img: crest/l112096.png, https://fifatracker-cdn.fra1.digitaloceanspaces.com/img/assets/26/crest/dark/l112096.png
+[ INFO ] Wed Dec 10 16:45:46 2025 - load_img: crest/notfound.png, https://fifatracker-cdn.fra1.digitaloceanspaces.com/img/assets/common/crest/notfound.png
+[ INFO ] Wed Dec 10 16:45:55 2025 - Veryfing DatabaseBasePtr offset
+[ INFO ] Wed Dec 10 16:45:55 2025 - addres_to_check 142F6BA6F, aob: 48 0F 44 2D ?? ?? ?? ?? 45 33 FF 8B 4D 08 8B F1 0F AF 75 00 8D 41 01
+[ INFO ] Wed Dec 10 16:45:55 2025 - Veryfing DatabaseBasePtr offset success
+[ INFO ] Wed Dec 10 16:45:55 2025 - Veryfing pModeManagers offset
+[ INFO ] Wed Dec 10 16:45:55 2025 - addres_to_check 146280198, aob: 4C 89 3D ?? ?? ?? ?? 48 89 3D ?? ?? ?? ?? EB 03 48 8B C3
+[ INFO ] Wed Dec 10 16:45:55 2025 - Veryfing pModeManagers offset success
+[ INFO ] Wed Dec 10 16:45:55 2025 - Cache Player Names
+[ INFO ] Wed Dec 10 16:45:55 2025 - Cache Player Names Done
+[ INFO ] Wed Dec 10 16:45:55 2025 - load_img: heads/p255253.png, https://fifatracker-cdn.fra1.digitaloceanspaces.com/img/assets/26/heads/p255253.png
+[ INFO ] Wed Dec 10 16:45:56 2025 - load_img: heads/notfound.png, https://fifatracker-cdn.fra1.digitaloceanspaces.com/img/assets/common/heads/notfound.png
+[ INFO ] Wed Dec 10 16:45:56 2025 - load_img: crest/l73.png, https://fifatracker-cdn.fra1.digitaloceanspaces.com/img/assets/26/crest/dark/l73.png
+[ INFO ] Wed Dec 10 16:45:56 2025 - load_img: crest/notfound.png, https://fifatracker-cdn.fra1.digitaloceanspaces.com/img/assets/common/crest/notfound.png
+[ WARNING ] Wed Dec 10 16:46:00 2025 - Futbin API JSON decode failed. Falling back to HTML scraping...
+[ INFO ] Wed Dec 10 16:46:00 2025 - FUT HTML search: https://www.futbin.com/26/players?page=1&search=vitinha
+[ INFO ] Wed Dec 10 16:46:03 2025 - Saved HTML response to logs/futbin_search_debug.html for inspection
+[ INFO ] Wed Dec 10 16:46:03 2025 - Found 5 players from HTML
+[ WARNING ] Wed Dec 10 16:46:05 2025 - Futbin API JSON decode failed. Falling back to HTML scraping...
+[ INFO ] Wed Dec 10 16:46:05 2025 - FUT HTML search: https://www.futbin.com/25/players?page=1&search=vitinha
+[ INFO ] Wed Dec 10 16:46:06 2025 - Saved HTML response to logs/futbin_search_debug.html for inspection
+[ INFO ] Wed Dec 10 16:46:06 2025 - Found 7 players from HTML
+[ INFO ] Wed Dec 10 16:46:07 2025 - Loading FUT25 player: 60963
+[ INFO ] Wed Dec 10 16:46:07 2025 - Using URL from search: https://www.futbin.com/25/player/60963/vitor-machado-ferreira
+[ INFO ] Wed Dec 10 16:46:07 2025 - Fetching URL: https://www.futbin.com/25/player/60963/vitor-machado-ferreira
+[ INFO ] Wed Dec 10 16:46:07 2025 - Reply len: 1770498
+[ WARNING ] Wed Dec 10 16:46:07 2025 - base_playerid not found in HTML, using playerid from URL
+[ INFO ] Wed Dec 10 16:46:08 2025 - club_img not found
+[ INFO ] Wed Dec 10 16:46:08 2025 - nation_img not found
+[ INFO ] Wed Dec 10 16:46:08 2025 - Found originalStats in JavaScript
+[ INFO ] Wed Dec 10 16:46:08 2025 - Successfully decoded originalStats JSON
+[ INFO ] Wed Dec 10 16:46:08 2025 - Stats mapped successfully
+[ INFO ] Wed Dec 10 16:46:08 2025 - Loading FUT25 player: 60963 Finished
+[ INFO ] Wed Dec 10 16:46:08 2025 - load_img: ut/cards_bg/1_gold.png, https://cdn.futbin.com/content/fifa22/img/cards/1_gold.png?v=138
+[ INFO ] Wed Dec 10 16:46:08 2025 - load_img: flags/f0.png, nil
+[ INFO ] Wed Dec 10 16:46:08 2025 - load_img: crest/l0.png, nil
+[ INFO ] Wed Dec 10 16:46:15 2025 - fut_copy_card_to_gui
+[ INFO ] Wed Dec 10 16:46:15 2025 - Has stat_json from futbin: true
+[ INFO ] Wed Dec 10 16:46:15 2025 - fut_copy_card_to_gui, playerid: 60963
+[ INFO ] Wed Dec 10 16:46:15 2025 - Using stats from futbin originalStats
+[ INFO ] Wed Dec 10 16:46:19 2025 - Applying chem style index 17
+[ INFO ] Wed Dec 10 16:46:20 2025 - fut_copy_card_to_gui finished
+[ INFO ] Wed Dec 10 16:46:28 2025 - Apply Changes player
+[ INFO ] Wed Dec 10 16:46:29 2025 - Player with ID 255253 has been edited
+[ INFO ] Wed Dec 10 16:47:14 2025 - Deactivating all scripts
+[ INFO ] Wed Dec 10 16:47:14 2025 - Deactivated all scripts

@@ -3973,12 +3973,12 @@ function thisFormManager:fut_get_player_details(playerid, fut_fifa, player_name,
     local name = string.match(reply, '<div style="color:[#%S+;|;]+" class="pcdisplay%-name">([%S-? ?]+)</div>')
     local pos = string.match(reply, '<div style="color:[#%S+;|;]+" class="pcdisplay%-pos">([%w]+)</div>')
 
-    local stat1_name, stat1_val = string.match(reply, 'class="pcdisplay%-ovr1[^"]*"[^>]*data%-stat="(%w+)"[^>]*>(%d+)<')
-    local stat2_name, stat2_val = string.match(reply, 'class="pcdisplay%-ovr2[^"]*"[^>]*data%-stat="(%w+)"[^>]*>(%d+)<')
-    local stat3_name, stat3_val = string.match(reply, 'class="pcdisplay%-ovr3[^"]*"[^>]*data%-stat="(%w+)"[^>]*>(%d+)<')
-    local stat4_name, stat4_val = string.match(reply, 'class="pcdisplay%-ovr4[^"]*"[^>]*data%-stat="(%w+)"[^>]*>(%d+)<')
-    local stat5_name, stat5_val = string.match(reply, 'class="pcdisplay%-ovr5[^"]*"[^>]*data%-stat="(%w+)"[^>]*>(%d+)<')
-    local stat6_name, stat6_val = string.match(reply, 'class="pcdisplay%-ovr6[^"]*"[^>]*data%-stat="(%w+)"[^>]*>(%d+)<')
+    local stat1_name, stat1_val = string.match(reply, 'pcdisplay%-ovr1[^>]*data%-stat="(%w+)"[^>]*>.-(%d+).-<')
+    local stat2_name, stat2_val = string.match(reply, 'pcdisplay%-ovr2[^>]*data%-stat="(%w+)"[^>]*>.-(%d+).-<')
+    local stat3_name, stat3_val = string.match(reply, 'pcdisplay%-ovr3[^>]*data%-stat="(%w+)"[^>]*>.-(%d+).-<')
+    local stat4_name, stat4_val = string.match(reply, 'pcdisplay%-ovr4[^>]*data%-stat="(%w+)"[^>]*>.-(%d+).-<')
+    local stat5_name, stat5_val = string.match(reply, 'pcdisplay%-ovr5[^>]*data%-stat="(%w+)"[^>]*>.-(%d+).-<')
+    local stat6_name, stat6_val = string.match(reply, 'pcdisplay%-ovr6[^>]*data%-stat="(%w+)"[^>]*>.-(%d+).-<')
     
     self.logger:debug(string.format("Face stats: [%s=%s] [%s=%s] [%s=%s] [%s=%s] [%s=%s] [%s=%s]", 
         tostring(stat1_name), tostring(stat1_val),
